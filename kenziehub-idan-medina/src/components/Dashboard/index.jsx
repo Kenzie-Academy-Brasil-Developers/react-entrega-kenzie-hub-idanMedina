@@ -1,14 +1,14 @@
-import React from 'react'
-import HeaderDashboard from './Header'
-import UserInfo from './UserInfo'
+import React from "react";
+import HeaderDashboard from "./Header";
+import UserInfo from "./UserInfo";
 
-const DashboardPage = () => {
+const DashboardPage = ({ response }) => {
   return (
     <>
-        <HeaderDashboard />
-        <UserInfo />
+      <HeaderDashboard />
+      <UserInfo response={response} />
     </>
-  )
-}
+  );
+};
 
-export default DashboardPage
+export default DashboardPage;

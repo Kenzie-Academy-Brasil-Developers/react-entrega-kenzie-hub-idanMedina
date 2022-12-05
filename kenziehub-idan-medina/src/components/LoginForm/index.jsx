@@ -19,7 +19,7 @@ const schema = yup.object().shape({
     .min(6, "Mínimo 6 caracteres"),
 });
 
-const LoginForm = (/* {userLogin} */) => {
+const LoginForm = ({setLogin}) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -34,20 +34,22 @@ const LoginForm = (/* {userLogin} */) => {
   const submit = (data) => {
     userLogin(data, setLoading);
   };
+
   const userLogin = async (data, setLoading) => {
     try {
       setLoading(true);
       const response = await api.post("/sessions", data);
       localStorage.setItem("@TOKEN", response.data.token);
       localStorage.setItem("@USERID", response.data.user.id);
+      setLogin(true)
       navigate("dashboard");
     } catch (error) {
-      console.log(error);
-      /* toast.error(error.response.data.error); */
+      toast.error(error.response.data.message);
     } finally {
       setLoading(false);
     }
   };
+  
   return (
     <>
       <Formulary onSubmit={handleSubmit(submit)}>

@@ -10,7 +10,7 @@ import { FormDiv, Formulary } from "../../styled/form";
 import { Input, Select } from "../../styled/inputs";
 import { Paragraph, ParagraphRegister, Title1 } from "../../styled/typography";
 
-const RegisterForm = (/* {newUser} */) => {
+const RegisterForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const options = [
@@ -59,13 +59,13 @@ const RegisterForm = (/* {newUser} */) => {
   async function newUser(data, setLoading) {
     try {
       setLoading(true);
-      console.log(data);
-      const response = await api.post("/users", data);
-      console.log(response.data.id);
+      await api.post("/users", data);
       navigate("/");
     } catch (error) {
       console.log(error);
-      /* toast.error(error.response.message); */
+      toast.error(
+        error.response.data.message.forEach((warning) => toast.error(warning))
+      );
     } finally {
       setLoading(false);
     }

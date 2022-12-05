@@ -1,54 +1,34 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import React, { useEffect, useState } from "react";
 import { RoutesMaster as Routes } from "./routes/routes.js";
 import { api } from "./services/api.js";
 import { GlobalStyle } from "./styled/global.js";
 
 function App() {
-  /* const [user, setUser] = useState(null); */
-  /*   const navigate = useNavigate();
+  const [response, setResponse] = useState(true);
+  const [login, setLogin] = useState(false);
 
-   const userLogin= async (data, setLoading) =>{
-    try {
-      setLoading(true)
-      const response= await api.post('/user', data);
-      localStorage.setItem('@TOKEN', response.token);
-      localStorage.setItem('@USERID', response.user.id);
-      navigate('dashboard')
-    } catch (error) {
-      toast.error(error.response.message);
-    } finally {
-      setLoading(false)
+  useEffect(() => {
+    const token = localStorage.getItem("@TOKEN");
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    async function getUser() {
+      try {
+        const resp = await api.get(`/profile`, headers);
+        setResponse(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }; */
-  /* 
-  async function newUser(data, setLoading){
-   try {
-    setLoading(true)
-     const response= await api.post('/session', data);
-     console.log(response.id);
-     navigate('/')
-   } catch (error) {
-     toast.error(error.response.message);
-   } finally {
-     setLoading(false)
-   }
- }; */
-
-  /*   function logout(){
-    localStorage.removeItem('@TOKEN');
-    localStorage.removeItem('@USERID');
-    setUser(null);
-    navigate('/'); 
- } */
+    getUser();
+  }, [login]);
 
   return (
     <>
       <GlobalStyle />
-      <Routes
-        /* setUser={setUser} */ /* userLogin={userLogin} */ /* newUser={newUser} */
-      />
+      <Routes response={response} setLogin={setLogin} />
     </>
   );
 }

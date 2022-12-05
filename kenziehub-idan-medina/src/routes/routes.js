@@ -5,16 +5,17 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 
 export const RoutesMaster = (
-  { setUser } /* {userLogin} */ /* , {newUser} */
+  { response, setLogin} 
 ) => {
+  
   return (
     <Routes>
-      <Route path="/" element={<LoginPage /* userLogin={userLogin} */ />} />
+      <Route path="/" element={<LoginPage  setLogin= {setLogin} />} />
       <Route
         path="register"
-        element={<RegisterPage /* newUser={newUser} */ />}
+        element={<RegisterPage />}
       />
-      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="dashboard" element={<Dashboard response = {response}/>} />
     </Routes>
   );
 };
