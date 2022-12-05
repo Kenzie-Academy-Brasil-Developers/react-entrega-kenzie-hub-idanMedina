@@ -38,7 +38,6 @@ const LoginForm = (/* {userLogin} */) => {
     try {
       setLoading(true);
       const response = await api.post("/sessions", data);
-      console.log(response);
       localStorage.setItem("@TOKEN", response.data.token);
       localStorage.setItem("@USERID", response.data.user.id);
       navigate("dashboard");

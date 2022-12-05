@@ -5,34 +5,35 @@ import { api } from "../../../services/api";
 import { Paragraph, Title1 } from "../../../styled/typography";
 
 const UserInfo = () => {
-  const [user, setUser] = useState("");
+  const [response, setResponse] = useState([]);
+  console.log(response)
 
   useEffect(() => {
-    const userId = localStorage.getItem("@USERID");
-    console.log(userId);
+    const token = localStorage.getItem("@TOKEN");
+    console.log(token);
     const headers = {
       headers: {
-        Authorization: `Bearer ${userId}`,
+        Authorization: `Bearer ${token}`,
       },
     };
     console.log(headers);
     async function getUser() {
       try {
-        const response = await api.get(`users/${userId}` /* , headers */);
-        console.log(response);
-        setUser(response);
+        const resp = await api.get(`/profile` , headers);
+        console.log(resp);
+        setResponse(resp);
       } catch (error) {
         console.log(error);
       }
-    }
+    };
     getUser();
   }, []);
 
   return (
     <>
       <section>
-        <Title1>{user.data.name}</Title1>
-        <Paragraph>{user.data.course_module}</Paragraph>
+        <Title1>{/* response.data.name */}</Title1>
+        <Paragraph>{/* response.data.course_module */}</Paragraph>
       </section>
       <hr></hr>
     </>
