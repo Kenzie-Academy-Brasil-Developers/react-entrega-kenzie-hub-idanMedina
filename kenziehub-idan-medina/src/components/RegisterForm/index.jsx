@@ -38,6 +38,10 @@ const RegisterForm = () => {
       .string()
       .required("Senha obrigatória")
       .min(6, "Mínimo 6 caracteres"),
+    passwordConfirm: yup
+    .string()
+    .required("Senha obrigatória")
+    .oneOf([yup.ref("password")], "As senhas não conferem"),
     name: yup.string().required("Nome obrigatório"),
     bio: yup.string().required("Bio obrigatória"),
     contact: yup.string().required("Contato obrigatória"),
@@ -60,11 +64,17 @@ const RegisterForm = () => {
     try {
       setLoading(true);
       await api.post("/users", data);
-      navigate("/");
+      toast.success("Cadastro efetuado com sucesso", {
+        theme: "dark",
+        autoClose: 1667,
+      });
+      setTimeout(() => navigate("/"), 1667);
     } catch (error) {
       console.log(error);
       toast.error(
-        error.response.data.message.forEach((warning) => toast.error(warning))
+        error.response.data.message.forEach((warning) => toast.error(warning), {
+          theme: "dark",
+        })
       );
     } finally {
       setLoading(false);
@@ -78,6 +88,7 @@ const RegisterForm = () => {
         <FormDiv>
           <label>Nome</label>
           <Input
+            key="name"
             placeholder="Digite aqui seu nome"
             type="text"
             {...register("name")}
@@ -87,6 +98,7 @@ const RegisterForm = () => {
         <FormDiv>
           <label>Email</label>
           <Input
+            key="email"
             placeholder="Digite aqui seu email"
             type="email"
             {...register("email")}
@@ -96,6 +108,7 @@ const RegisterForm = () => {
         <FormDiv>
           <label>Senha</label>
           <Input
+            key="password"
             placeholder="Digite aqui seu senha"
             type="password"
             {...register("password")}
@@ -105,14 +118,17 @@ const RegisterForm = () => {
         <FormDiv>
           <label>Confirmar Senha</label>
           <Input
+            key="passwordConfirm"
             placeholder="Digite aqui novamente sua senha"
             type="password"
-            /* {...register('password')} */
+            {...register("passwordConfirm")}
           />
+          {errors.passwordConfirm && <Paragraph>{errors.passwordConfirm.message}</Paragraph>}
         </FormDiv>
         <FormDiv>
           <label>Bio</label>
           <Input
+            key="bio"
             placeholder="Fale sobre você"
             type="text"
             {...register("bio")}
@@ -122,6 +138,7 @@ const RegisterForm = () => {
         <FormDiv>
           <label>Contato</label>
           <Input
+            key="contact"
             placeholder="Opção de contato"
             type="text"
             {...register("contact")}
@@ -130,7 +147,7 @@ const RegisterForm = () => {
         </FormDiv>
         <FormDiv>
           <label>Selecionar módulo</label>
-          <Select {...register("course_module")}>
+          <Select key="course_module" {...register("course_module")}>
             {options.map((option) => (
               <option value={option.value}>{option.label}</option>
             ))}

@@ -3,13 +3,12 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/Logo.png";
 import { NavBtn } from "../../../styled/buttons";
 
-const HeaderDashboard = () => {
+const HeaderDashboard = ({setLogin}) => {
   const navigate = useNavigate();
 
   function logout() {
-    localStorage.removeItem("@TOKEN");
-    localStorage.removeItem("@USERID");
-    /* setUser(null); */
+    localStorage.clear();
+    setLogin(false);
     navigate("/");
   }
 
@@ -19,7 +18,7 @@ const HeaderDashboard = () => {
         <img src={logo} alt="KenzieHub" />
         <NavBtn onClick={logout}>Sair</NavBtn>
       </header>
-      <hr></hr>
+      <hr/>
     </>
   );
 };

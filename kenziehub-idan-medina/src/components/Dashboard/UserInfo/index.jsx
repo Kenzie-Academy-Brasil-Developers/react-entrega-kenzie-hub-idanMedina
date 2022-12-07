@@ -9,7 +9,7 @@ const UserInfo = ({response}) => {
         <Title1>{response && response.name}</Title1>
         <Paragraph>{response && response.course_module}</Paragraph>
       </section>
-      <hr></hr>
+      <hr/>
     </>
   );
 

@@ -22,6 +22,7 @@ function App() {
         console.log(error);
       }
     }
+    console.log(login)
     getUser();
   }, [login]);
 

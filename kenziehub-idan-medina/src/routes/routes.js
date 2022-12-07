@@ -15,7 +15,7 @@ export const RoutesMaster = (
         path="register"
         element={<RegisterPage />}
       />
-      <Route path="dashboard" element={<Dashboard response = {response}/>} />
+      <Route path="dashboard" element={<Dashboard response = {response} setLogin= {setLogin} />} />
     </Routes>
   );
 };
