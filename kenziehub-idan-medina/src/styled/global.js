@@ -33,10 +33,6 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     background: var(--grey-4);
     padding-bottom: 2rem;
-
-    @media (max-width: 900px) {
-      padding: 0 2rem 2rem 2rem;
-    }
   }
 
   header {
@@ -46,6 +42,11 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
     padding: 1.75rem 0;
     max-width: 48.75rem;
+
+    @media (max-width: 900px) {
+      max-width:100%;
+      margin: 0 2rem;
+    }
   }
 
   section {
@@ -55,12 +56,21 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0 auto;
     padding: 2.75rem 0;
     max-width: 48.75rem;
+
+    @media (max-width: 900px) {
+      max-width:100%;
+      margin: 0 2rem;
+    }
   }
 
   hr{
     background: var(--grey-3);
     height: 1px;
     width: 100vw;
+
+    @media (max-width: 900px) {
+      max-width:100%;
+    }
   }
 
   button {
@@ -88,6 +98,11 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 48.75rem;
     border-radius: 0.25rem;
     gap: 1rem;
+
+    @media (max-width: 900px) {
+      max-width:100%;
+      margin: 0 2rem;
+    }
   }
 
   li {
