@@ -1,16 +1,10 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
 import logo from "../../../assets/Logo.png";
+import { UserContext } from "../../../providers/UserContext";
 import { NavBtn } from "../../../styled/buttons";
 
-const HeaderDashboard = ({setLogin}) => {
-  const navigate = useNavigate();
-
-  function logout() {
-    localStorage.clear();
-    setLogin(false);
-    navigate("/");
-  }
+const HeaderDashboard = () => {
+  const {logout} =useContext(UserContext);
 
   return (
     <>

@@ -17,3 +17,13 @@ export const ParagraphRegister = styled.p`
   color: var(--grey-1);
   margin: 2rem 0;
 `;
+export const TechTitle = styled.h3`
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--grey-0);
+`
+export const TechName = styled.h4`
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-white);
+`

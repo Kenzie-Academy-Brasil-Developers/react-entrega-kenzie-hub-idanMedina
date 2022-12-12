@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,10 +6,7 @@ import { LoginBtn, RegisterLink } from "../../styled/buttons";
 import { FormDiv, Formulary } from "../../styled/form";
 import { Input } from "../../styled/inputs";
 import { Paragraph, Title1 } from "../../styled/typography";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
-import { toast } from "react-toastify";
+import { UserContext } from "../../providers/UserContext";
 
 const schema = yup.object().shape({
   email: yup.string().required("Nome obrigatório"),
@@ -19,9 +16,10 @@ const schema = yup.object().shape({
     .min(6, "Mínimo 6 caracteres"),
 });
 
-const LoginForm = ({ setLogin }) => {
-  const navigate = useNavigate();
+const LoginForm = ({ setUser }) => {
   const [loading, setLoading] = useState(false);
+
+  const{userLogin} = useContext(UserContext);
 
   const {
     register,
@@ -33,22 +31,6 @@ const LoginForm = ({ setLogin }) => {
 
   const submit = (data) => {
     userLogin(data, setLoading);
-  };
-
-  const userLogin = async (data, setLoading) => {
-    try {
-      setLoading(true);
-      const response = await api.post("/sessions", data);
-      localStorage.setItem("@TOKEN", response.data.token);
-      localStorage.setItem("@USERID", response.data.user.id);
-      setLogin(true);
-      toast.success("Login efetuado", { theme: "dark", autoClose: 1667 });
-      setTimeout(() => navigate("dashboard"), 1667);
-    } catch (error) {
-      toast.error(error.response.data.message, { theme: "dark" });
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (

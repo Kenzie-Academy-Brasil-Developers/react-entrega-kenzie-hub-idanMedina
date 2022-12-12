@@ -12,7 +12,7 @@ const RegisterPage = (/* {newUser} */) => {
         <NavLink to="/">Voltar</NavLink>
       </DivNav>
 
-      <RegisterForm /* newUser={newUser} */ />
+      <RegisterForm />
     </>
   );
 };

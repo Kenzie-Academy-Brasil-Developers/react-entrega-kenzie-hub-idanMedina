@@ -1,17 +1,16 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import * as yup from "yup";
-import { api } from "../../services/api";
+import { UserContext } from "../../providers/UserContext";
 import { RegisterBtn } from "../../styled/buttons";
 import { FormDiv, Formulary } from "../../styled/form";
 import { Input, Select } from "../../styled/inputs";
 import { Paragraph, ParagraphRegister, Title1 } from "../../styled/typography";
 
 const RegisterForm = () => {
-  const navigate = useNavigate();
+  const { newUser } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
   const options = [
     {
@@ -39,9 +38,9 @@ const RegisterForm = () => {
       .required("Senha obrigatória")
       .min(6, "Mínimo 6 caracteres"),
     passwordConfirm: yup
-    .string()
-    .required("Senha obrigatória")
-    .oneOf([yup.ref("password")], "As senhas não conferem"),
+      .string()
+      .required("Senha obrigatória")
+      .oneOf([yup.ref("password")], "As senhas não conferem"),
     name: yup.string().required("Nome obrigatório"),
     bio: yup.string().required("Bio obrigatória"),
     contact: yup.string().required("Contato obrigatória"),
@@ -60,26 +59,6 @@ const RegisterForm = () => {
     newUser(data, setLoading);
   };
 
-  async function newUser(data, setLoading) {
-    try {
-      setLoading(true);
-      await api.post("/users", data);
-      toast.success("Cadastro efetuado com sucesso", {
-        theme: "dark",
-        autoClose: 1667,
-      });
-      setTimeout(() => navigate("/"), 1667);
-    } catch (error) {
-      console.log(error);
-      toast.error(
-        error.response.data.message.forEach((warning) => toast.error(warning), {
-          theme: "dark",
-        })
-      );
-    } finally {
-      setLoading(false);
-    }
-  }
   return (
     <>
       <Formulary onSubmit={handleSubmit(submit)}>
@@ -123,7 +102,9 @@ const RegisterForm = () => {
             type="password"
             {...register("passwordConfirm")}
           />
-          {errors.passwordConfirm && <Paragraph>{errors.passwordConfirm.message}</Paragraph>}
+          {errors.passwordConfirm && (
+            <Paragraph>{errors.passwordConfirm.message}</Paragraph>
+          )}
         </FormDiv>
         <FormDiv>
           <label>Bio</label>
@@ -148,8 +129,10 @@ const RegisterForm = () => {
         <FormDiv>
           <label>Selecionar módulo</label>
           <Select key="course_module" {...register("course_module")}>
-            {options.map((option) => (
-              <option value={option.value}>{option.label}</option>
+            {options.map((option, index) => (
+              <option key={`option-${index}`} value={option.value}>
+                {option.label}
+              </option>
             ))}
           </Select>
           {errors.course_module && (

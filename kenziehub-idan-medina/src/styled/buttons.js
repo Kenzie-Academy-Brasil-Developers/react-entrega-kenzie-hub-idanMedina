@@ -80,3 +80,15 @@ export const NavBtn = styled.button`
     background: var(--grey-2);
   }
 `
+export const PlusBtn = styled.button`
+  padding: 0 0.75rem;
+  width: auto;
+  height: 2rem;
+  font-weight: 600;
+  font-size: 0.625rem;
+  color: var(--grey-0);
+  background: var(--grey-3);
+  &:hover {
+    background: var(--grey-2);
+  }
+`
