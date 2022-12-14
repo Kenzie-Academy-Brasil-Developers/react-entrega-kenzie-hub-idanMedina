@@ -9,8 +9,8 @@ const UserInfo = () => {
   return (
     <>
       <section>
-        <Title1>{user && user.name}</Title1>
-        <Paragraph>{user && user.course_module}</Paragraph>
+        <Title1>{user.name}</Title1>
+        <Paragraph>{user.course_module}</Paragraph>
       </section>
       <hr/>
     </>

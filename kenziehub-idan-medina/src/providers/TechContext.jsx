@@ -1,5 +1,4 @@
-import React, { createContext, useState } from "react";
-import { useContext } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
@@ -8,11 +7,11 @@ import { UserContext } from "./UserContext";
 export const TechContext = createContext({});
 
 const TechProvider = ({ children }) => {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
+  const [techs, setTechs] = useState(null);
   const [modal, setModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [id, setId] = useState(null);
-  const navigate = useNavigate();
 
   const token = localStorage.getItem("@TOKEN");
   const headers = {
@@ -21,16 +20,36 @@ const TechProvider = ({ children }) => {
     },
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("@TOKEN");
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    async function getUser() {
+      try {
+        const resp = await api.get(`/profile`, headers);
+        setUser(resp.data);
+      } catch (error) {
+        console.log(error);
+        localStorage.clear();
+      }
+    }
+    token && getUser();
+  }, [techs]);
+
   async function setTech(data, setLoading) {
     try {
       setLoading(true);
-      const response = await api.post("/users/techs", data, headers);
-      setUser(response.data.user);
+      await api.post("/users/techs", data, headers);
       toast.success("Tecnologia adicionada", {
         theme: "dark",
         autoClose: 1667,
       });
       setModal(false);
+      setTechs("Tecnologia adicionada");
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message, {
@@ -44,13 +63,12 @@ const TechProvider = ({ children }) => {
   async function removeTech(id, setLoading) {
     try {
       setLoading(true);
-      const response = await api.delete(`/users/techs/${id}`, headers);
-      setUser(response.data.user);
+      await api.delete(`/users/techs/${id}`, headers);
       toast.success("Tecnologia removida", {
         theme: "dark",
         autoClose: 1667,
       });
-      setTimeout(() => navigate("/dashboard"), 1667);
+      setTechs("Tecnologia removida");
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message, {
@@ -64,13 +82,14 @@ const TechProvider = ({ children }) => {
   async function updateTech(id, body, setLoading) {
     try {
       setLoading(true);
-      const response = await api.put(`/users/techs/${id}`, body, headers);
-      setUser(response.data.user);
+      await api.put(`/users/techs/${id}`, body, headers);
+
       toast.success("Nível atualizado", {
         theme: "dark",
         autoClose: 1667,
       });
-      setTimeout(() => navigate("/dashboard"), 1667);
+      setTechs("Nível atualizado");
+      setEditModal(false);
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message, {

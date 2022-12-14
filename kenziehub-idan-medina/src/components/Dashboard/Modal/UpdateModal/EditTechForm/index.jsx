@@ -47,7 +47,6 @@ const EditTechForm = () => {
   });
 
   const submit = (data) => {
-    console.log(id, data)
     updateTech(id, data, setLoading);
   };
   return (
