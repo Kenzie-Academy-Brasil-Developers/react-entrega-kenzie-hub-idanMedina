@@ -37,7 +37,6 @@ export const ModalHead = styled.div`
   padding: 0.75rem 1.25rem;
   background: var(--grey-2);
   width: 100%;
-  z-index: 20;
   border-radius: 0.25rem 0.25rem 0 0;
 `;
 export const ModalDiv = styled.div`
@@ -47,7 +46,6 @@ export const ModalDiv = styled.div`
   justify-content: center;
   width: 23rem;
   gap: 1.375rem;
-  z-index: 20;
   background: var(--grey-3);
   padding: 1.5rem 1.0625rem 2rem 1.375rem;
 
@@ -58,7 +56,6 @@ export const ModalDiv = styled.div`
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
-  z-index: 20;
   border-radius: 0.25rem;
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   animation: ${MoveModal} 1s ease;

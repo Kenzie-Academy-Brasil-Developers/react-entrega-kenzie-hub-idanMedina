@@ -18,5 +18,6 @@ export const Close = styled(AiOutlineClose)`
 `;
 export const DivIcon = styled.div`
   display: flex;
+  align-items: center;
   gap: 1.5625rem;
 `;

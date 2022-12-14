@@ -16,6 +16,6 @@ export const ModalScreen = styled.div`
   background-color: var(--grey-opacity-3);
   top: 0;
   margin: 0 auto;
-  z-index: 1;
+  z-index: 2;
   animation: ${FadeModal} 1s linear;
 `;

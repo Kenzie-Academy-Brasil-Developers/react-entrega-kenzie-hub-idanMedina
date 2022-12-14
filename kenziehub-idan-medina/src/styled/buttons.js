@@ -50,7 +50,7 @@ export const RegisterBtn = styled.button`
 `;
 
 export const NavLink = styled(Link)`
-display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: auto;
@@ -79,7 +79,7 @@ export const NavBtn = styled.button`
   &:hover {
     background: var(--grey-2);
   }
-`
+`;
 export const PlusBtn = styled.button`
   padding: 0 0.75rem;
   width: auto;
@@ -91,4 +91,14 @@ export const PlusBtn = styled.button`
   &:hover {
     background: var(--grey-2);
   }
-`
+`;
+export const DivTarget = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  background: transparent;
+  z-index: 1;
+`;
