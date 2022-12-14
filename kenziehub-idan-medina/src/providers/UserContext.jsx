@@ -28,6 +28,7 @@ export const UserProvider = ({ children }) => {
       }
     }
     token && getUser();
+    console.log(user);
   }, [user]);
 
   async function newUser(data, setLoading) {

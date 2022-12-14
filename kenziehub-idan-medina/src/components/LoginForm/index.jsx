@@ -16,7 +16,7 @@ const schema = yup.object().shape({
     .min(6, "Mínimo 6 caracteres"),
 });
 
-const LoginForm = ({ setUser }) => {
+const LoginForm = () => {
   const [loading, setLoading] = useState(false);
 
   const{userLogin} = useContext(UserContext);

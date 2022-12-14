@@ -2,15 +2,14 @@ import React from "react";
 import logo from "../assets/Logo.png";
 import RegisterForm from "../components/RegisterForm";
 import { NavLink } from "../styled/buttons";
-import { DivNav } from "../styled/form";
 
-const RegisterPage = (/* {newUser} */) => {
+const RegisterPage = () => {
   return (
     <>
-      <DivNav>
+      <header>
         <img src={logo} alt="KenzieHub" />
         <NavLink to="/">Voltar</NavLink>
-      </DivNav>
+      </header>
 
       <RegisterForm />
     </>

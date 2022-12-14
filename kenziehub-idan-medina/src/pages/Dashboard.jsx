@@ -1,10 +1,10 @@
 import React from "react";
 import DashboardPage from "../components/Dashboard";
 
-const Dashboard = ({response, setUser}) => {
+const Dashboard = () => {
   return (
     <>
-      <DashboardPage response={response} setUser= {setUser}  />
+      <DashboardPage   />
     </>
   );
 };

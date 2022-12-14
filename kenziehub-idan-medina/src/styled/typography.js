@@ -11,6 +11,15 @@ export const Paragraph = styled.p`
   font-size: 0.75rem;
   color: var(--grey-1);
 `;
+export const ParagraphCard = styled.p`
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--grey-1);
+  cursor:pointer;
+  &:hover {
+    color: var(--color-white);
+  }
+`;
 export const ParagraphRegister = styled.p`
   font-weight: 600;
   font-size: 0.75rem;

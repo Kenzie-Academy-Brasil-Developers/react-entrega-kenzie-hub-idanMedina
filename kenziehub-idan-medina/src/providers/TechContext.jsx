@@ -10,6 +10,8 @@ export const TechContext = createContext({});
 const TechProvider = ({ children }) => {
   const { user, setUser } = useContext(UserContext);
   const [modal, setModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [id, setId] = useState(null);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("@TOKEN");
@@ -28,14 +30,12 @@ const TechProvider = ({ children }) => {
         theme: "dark",
         autoClose: 1667,
       });
-      setTimeout(() => navigate("/"), 1667);
+      setModal(false);
     } catch (error) {
       console.log(error);
-      toast.error(
-        error.response.data.message, {
-          theme: "dark",
-        })
-      ;
+      toast.error(error.response.data.message, {
+        theme: "dark",
+      });
     } finally {
       setLoading(false);
     }
@@ -50,21 +50,51 @@ const TechProvider = ({ children }) => {
         theme: "dark",
         autoClose: 1667,
       });
-      setTimeout(() => navigate("/"), 1667);
+      setTimeout(() => navigate("/dashboard"), 1667);
     } catch (error) {
       console.log(error);
-      toast.error(
-        error.response.data.message, {
-          theme: "dark",
-        })
-      ;
+      toast.error(error.response.data.message, {
+        theme: "dark",
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function updateTech(id, body, setLoading) {
+    try {
+      setLoading(true);
+      const response = await api.put(`/users/techs/${id}`, body, headers);
+      setUser(response.data.user);
+      toast.success("Nível atualizado", {
+        theme: "dark",
+        autoClose: 1667,
+      });
+      setTimeout(() => navigate("/dashboard"), 1667);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message, {
+        theme: "dark",
+      });
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <TechContext.Provider value={{ modal, setModal, setTech, removeTech }}>
+    <TechContext.Provider
+      value={{
+        modal,
+        editModal,
+        id,
+        setId,
+        setEditModal,
+        setModal,
+        setTech,
+        removeTech,
+        updateTech,
+      }}
+    >
       {children}
     </TechContext.Provider>
   );

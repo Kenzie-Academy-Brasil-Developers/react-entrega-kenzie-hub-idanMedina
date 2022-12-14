@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { keyframes } from "styled-components";
-import { ModalScreen } from "./modal";
 
 export const Formulary = styled.form`
   display: flex;
@@ -15,6 +14,10 @@ export const Formulary = styled.form`
   box-shadow: 0px 0.25rem 2.5rem -0.625rem rgba(0, 0, 0, 0.25);
   border-radius: 0.25rem;
   margin: 0 auto;
+  @media (max-width: 500px) {
+    max-width: 90vw;
+    margin: 0 2rem;
+  }
 `;
 
 export const MoveModal = keyframes`
@@ -71,11 +74,4 @@ export const FormDiv = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 1.33rem;
-`;
-
-export const DivNav = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 3rem auto;
 `;

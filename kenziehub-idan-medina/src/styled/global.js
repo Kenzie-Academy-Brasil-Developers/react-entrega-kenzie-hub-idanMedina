@@ -120,6 +120,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   #logo {
-    margin: 20vh auto 5vh 28%;
+    margin: 20vh auto 5vh 30%;
   }
 `;
