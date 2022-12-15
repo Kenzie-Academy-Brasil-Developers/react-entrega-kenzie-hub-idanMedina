@@ -100,5 +100,4 @@ export const DivTarget = styled.div`
   height: 2rem;
   cursor: pointer;
   background: transparent;
-  z-index: 1;
 `;

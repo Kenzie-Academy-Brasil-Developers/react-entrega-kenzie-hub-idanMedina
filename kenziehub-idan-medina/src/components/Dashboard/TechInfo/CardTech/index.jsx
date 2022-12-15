@@ -25,15 +25,13 @@ const CardTech = ({ index }) => {
         >
           {user.techs[index].status}
         </ParagraphCard>
-        <DivTarget
+        <Trash
           id={user.techs[index].id}
           onClick={(e) => {
             e.preventDefault();
             removeTech(e.target.id, setLoading);
           }}
-        >
-          <Trash />
-        </DivTarget>
+        />
       </DivIcon>
     </li>
   );

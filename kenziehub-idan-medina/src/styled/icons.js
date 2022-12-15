@@ -11,6 +11,7 @@ export const Plus = styled(BsPlus)`
 export const Trash = styled(FiTrash2)`
   color: var(--color-white);
   cursor: pointer;
+  z-index: 1;
 `;
 export const Close = styled(AiOutlineClose)`
   color: var(--grey-1);
